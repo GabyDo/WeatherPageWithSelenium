@@ -1,31 +1,24 @@
 package com.weather.data;
 
 public class WeatherInfo {
-    String period; //day of night
-    Integer temperature;
-    Integer humidity;
+    String temperature;
+    String humidity;
 
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
-    public Integer getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Integer temperature) {
+    public WeatherInfo setTemperature(String temperature) {
         this.temperature = temperature;
+        return this;
     }
 
-    public Integer getHumidity() {
+    public String getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(Integer humidity) {
+    public WeatherInfo setHumidity(String humidity) {
         this.humidity = humidity;
+        return this;
     }
 }
