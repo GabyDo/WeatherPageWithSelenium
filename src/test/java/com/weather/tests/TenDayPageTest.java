@@ -14,13 +14,13 @@ import javax.lang.model.element.Element;
 import java.time.Duration;
 import java.util.List;
 
-public class SingaporeSearch {
+public class TenDayPageTest {
     WebDriver driver;
     String googleUrl = "https://weather.com/vi-VN/weather/tenday/l/53692b85ecdcbeb3013c1bf60fa2737edfd8b6efc634ccd48d6cfdf435ddb89f";
 
     @Test
     public void testGet10days() {
-        By tenDayTab = By.xpath("//a[contains(@href, '/tenday/')][contains(@class, 'ListItem')]");
+
        By locationSearchField = By.id("LocationSearch_input");
        By searchLocationListBox = By.xpath("//div[contains(@id, 'LocationSearch_listbox')]/button");
        By tenDayInfoList = By.xpath("//div[contains(@class,'DailyForecast--DisclosureList')]//summary");
@@ -51,6 +51,13 @@ public class SingaporeSearch {
         List<WebElement> list =  driver.findElements(tenDayInfoList);
         for (WebElement e: list) {
             e.click();
+            ////div[contains(@class,'DailyForecast--DisclosureList')]//span[contains(@class,'DailyContent--daypartDate')]
+
+            ////h3[contains(text(),'26')]/parent::div//span[contains(@class,'highTempValue')]
+            ////div[contains(@class,'DailyForecast--DisclosureList')]//details[contains(@id,'detailIndex0')]//div[@class='DetailsTable--field--CPpc_']/span[@data-testid='PercentageValue']
+            ////div[contains(@class,'DailyForecast--DisclosureList')]//details[contains(@id,'detailIndex0')]//div[@class='DetailsTable--field--CPpc_']/span[@data-testid='PercentageValue']
+
+
         }
 
 

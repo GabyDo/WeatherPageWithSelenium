@@ -11,5 +11,30 @@ import org.testng.annotations.BeforeMethod;
 
 
 public class BaseTest {
+    private WebDriver driver;
+    protected HomePage homePage;
+
+    @BeforeClass
+    public void setUp(){
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+    }
+
+
+    @BeforeMethod
+    public void getWebstie( String url){
+        driver.get(url);
+    }
+
+
+    @AfterClass
+    public void tearDown() {
+        driver.close();
+        driver.quit();
+    }
+
+
 
 }

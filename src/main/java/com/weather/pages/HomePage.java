@@ -4,38 +4,30 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class HomePage {
     WebDriver driver ;
 
-    private By locationSearchField = By.id("LocationSearch_input");
-    private By dropdown = By.id("dropdown");
-
+    private By tenDayTab = By.xpath("//a[contains(@href, '/tenday/')][contains(@class, 'ListItem')]");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void inputLocationSearchField( String country) {
-        driver.findElement(locationSearchField).sendKeys(country);
-    }
-
-    public void selectFromDropDown(String option) {
-        findDropDownElement().selectByVisibleText(option);
-    }
-
-    public List<String> getSelectedOption() {
-        List<WebElement> selectElements = findDropDownElement().getAllSelectedOptions();
-        return selectElements.stream().map(e -> e.getText()).collect(Collectors.toList());
-    }
-
-    private Select findDropDownElement(){
-        return new Select(driver.findElement(dropdown));
+    public TenDayPage clickTenDayButton() {
+        clickLink(tenDayTab);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10L)); //hỏi phần này
+        return new TenDayPage(driver);
     }
 
 
+    private void clickLink(By byElement){
+        driver.findElement(tenDayTab).click();
+    }
 
 }
