@@ -13,7 +13,7 @@ A summary report.
 * Search country by word: singapore
 * Search country by word: sing
 
-Details step of test case:
+Detailed steps of test case:
 1. Open web url
 2. Click ten-day button
 3. Search for country: Singapore
