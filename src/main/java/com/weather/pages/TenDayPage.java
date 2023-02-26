@@ -42,12 +42,12 @@ public class TenDayPage extends CommonPage {
         this.driver = driver;
     }
 
-    public void inputSearchedCountry( String searchedCountry) {
+    public void inputSearchedCountry( String inputCountry, String expectedCountry) {
         //enter search string
-        sendKeyToElement(driver, locationSearchField, searchedCountry);
+        sendKeyToElement(driver, locationSearchField, inputCountry);
 
         //select drop down list
-        String countrySelected = String.format("%s, ",searchedCountry);
+        String countrySelected = String.format("%s, ",expectedCountry);
         selectItemFromParentDropdownList( driver, searchLocationListBox, countrySelected);
 
     }

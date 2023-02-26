@@ -6,30 +6,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
     private WebDriver driver;
     protected HomePage homePage;
     String url = "https://weather.com";
 
-    @BeforeClass
+    @BeforeTest
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(url);
-
-        homePage = new HomePage(driver);
 
     }
 
-
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         driver.close();
         driver.quit();
+    }
+
+    public void getHomepage(){
+        driver.get(url);
+        homePage = new HomePage(driver);
+
     }
 
     protected WebDriver getBrowserDriver(String browserName, String url) {

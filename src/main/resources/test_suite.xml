@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="suite" parallel="classes" thread-count="2">
+
+    <test name="test suite">
+        <classes>
+            <class name="com.weather.tests.TenDayPageTest" />
+        </classes>
+    </test>
+</suite>
