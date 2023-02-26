@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage {
+public class HomePage extends CommonPage{
     WebDriver driver ;
 
     private By tenDayTab = By.xpath("//a[contains(@href, '/tenday/')][contains(@class, 'ListItem')]");
@@ -17,14 +17,8 @@ public class HomePage {
     }
 
     public TenDayPage clickTenDayButton() {
-        clickLink(tenDayTab);
+        clickOnElement(driver, tenDayTab);
         return new TenDayPage(driver);
-    }
-
-
-    private void clickLink(By byElement){
-       new WebDriverWait(driver, Duration.ofSeconds(30))
-                .until(ExpectedConditions.visibilityOfElementLocated(tenDayTab)).click();
     }
 
 }

@@ -4,6 +4,8 @@ import com.weather.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -23,11 +25,6 @@ public class BaseTest {
 
     }
 
-//    @BeforeTest
-//    public void getWebsite()
-//    {
-//
-//    }
 
     @AfterClass
     public void tearDown() {
@@ -35,5 +32,33 @@ public class BaseTest {
         driver.quit();
     }
 
+    protected WebDriver getBrowserDriver(String browserName, String url) {
+
+        if(browserName.equalsIgnoreCase("firefox"))
+        {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
+        else if (browserName.equalsIgnoreCase("chrome"))
+        {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
+
+        else if (browserName.equalsIgnoreCase("safari"))
+        {
+            WebDriverManager.iedriver().arch32().setup();
+            driver = new SafariDriver();
+        }
+        else
+        {
+            throw new RuntimeException("Browser name invalid.");
+        }
+
+        driver.manage().window().maximize();
+        driver.get(url);
+
+        return driver;
+    }
 
 }

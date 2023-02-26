@@ -5,14 +5,11 @@ import com.weather.data.WeatherInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TenDayPage {
+public class TenDayPage extends CommonPage {
     WebDriver driver ;
 
     //search country textbox
@@ -46,34 +43,30 @@ public class TenDayPage {
     }
 
     public void inputSearchedCountry( String searchedCountry) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
         //enter search string
-        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(locationSearchField));
-        searchField.clear();
-        searchField.sendKeys(searchedCountry);
+        sendKeyToElement(driver, locationSearchField, searchedCountry);
 
         //select drop down list
-        WebElement buttonSearch = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(searchLocationListBox)).stream()
-                .filter(btn -> btn.getText().contains( String.format("%s, ",searchedCountry))).findFirst().orElse(null);
+        String countrySelected = String.format("%s, ",searchedCountry);
+        selectItemFromParentDropdownList( driver, searchLocationListBox, countrySelected);
 
-        buttonSearch.click();
     }
+
 
     public List<OneDayWeatherInfo> getDailyForecastList( String country) {
         List<OneDayWeatherInfo> dayWeatherInfoList = new ArrayList<>();
         OneDayWeatherInfo dayWeatherInfo;
-
         int elementSize =  driver.findElements(tenDayInfoList).size();
+
         for (int i=1; i< elementSize; i++) {
             String indexString = String.format("details[@id='detailIndex%s']", i);
 
             // day and  nigh info
-            List<WebElement> temperList = getElementsByXpath( xpathBuilder( rootPath, indexString, temperPath));
+            List<WebElement> temperList = getElementsByXpath(driver, xpathBuilder( rootPath, indexString, temperPath));
             String dayTemper = getAttributeOfElement(temperList.get(0));
             String nighTemper = getAttributeOfElement(temperList.get(1));
 
-            List<WebElement> humilityList = getElementsByXpath(xpathBuilder(rootPath, indexString, humidityPath));
+            List<WebElement> humilityList = getElementsByXpath(driver, xpathBuilder(rootPath, indexString, humidityPath));
             String dayHumility = getAttributeOfElement(humilityList.get(0));
             String nightHumility = getAttributeOfElement(humilityList.get(1));
 
@@ -81,7 +74,7 @@ public class TenDayPage {
             WeatherInfo nightInfo = new WeatherInfo().setHumidity(nightHumility).setTemperature(nighTemper);
 
             //set value for a day
-            String namePart = getAttributeOfElement( getElementsByXpath( xpathBuilder( rootPath, indexString, dayPartNamePath)).get(0));
+            String namePart = getAttributeOfElement( getElementsByXpath(driver, xpathBuilder( rootPath, indexString, dayPartNamePath)).get(0));
             dayWeatherInfo = new OneDayWeatherInfo()
                     .setDate(namePart)
                     .setLocation(country)
@@ -92,18 +85,6 @@ public class TenDayPage {
         }
 
         return dayWeatherInfoList;
-    }
-
-    private String xpathBuilder( String rootPart, String indexPart, String finalPart) {
-        return String.format("%s%s%s",rootPart, indexPart, finalPart);
-    }
-
-    private List<WebElement> getElementsByXpath( String xpath){
-        return driver.findElements(By.xpath(xpath));
-    }
-
-    private String getAttributeOfElement( WebElement element){
-        return element.getAttribute("innerHTML");
     }
 
 }
