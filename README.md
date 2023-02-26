@@ -13,19 +13,19 @@ A summary report.
 * Search country by word: singapore
 * Search country by word: sing
 
-Steps when run test:
+Details step of test case:
 1. Open web url
 2. Click ten-day button
 3. Search for country: Singapore
 4. Get weather information to a tendayPageInfoList List
 5. Export tendayPageInfoList List to a Json file
 
-Test name: TenDayPageTest.testGet10DaysWeatherInfoOfSingapore()
+Test name inside project: TenDayPageTest.testGet10DaysWeatherInfoOfSingapore()
 
 Note: The current implementation is only configure for the Google Chrome Browser. We can update to support other browser with the corresponding WebDriver
 
 
-### Test run step:
+### How to run:
 1. Prerequisites:  Installed IntelliJ IDE.
 
 2. Run:  Run maven test
