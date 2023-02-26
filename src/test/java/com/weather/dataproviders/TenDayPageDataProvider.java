@@ -31,7 +31,7 @@ public class TenDayPageDataProvider {
         data.add(new Object[]{scenario, inputWord, searchedCountry});
 
         //--------------------------------------------------------------------------------
-        scenario = "Search country by word: singapore";
+        scenario = "Search country by word: sing";
         //--------------------------------------------------------------------------------
         inputWord = "sing";
         searchedCountry = "Singapore";
